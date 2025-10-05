@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guide Médical — Les Héritiers</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="color-scheme" content="dark light">
+  <style>
+    @media print {
+      .no-print { display:none !important }
+      .print\:bg-white{ background:#fff !important }
+      .print\:text-black{ color:#000 !important }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#0a0a0a] text-neutral-100 antialiased">
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:py-10">
+    <!-- HERO -->
+    <section class="relative isolate overflow-hidden rounded-3xl border border-yellow-900/30 bg-gradient-to-b from-black via-neutral-950 to-neutral-950 p-6 sm:p-10 shadow-[inset_0_0_120px_rgba(255,215,130,0.05)]">
+      <div class="pointer-events-none absolute inset-0 opacity-30 [background:radial-gradient(1200px_600px_at_90%_10%,rgba(246,200,120,.15),transparent_60%),radial-gradient(800px_400px_at_10%_0%,rgba(230,180,80,.12),transparent_60%)]"></div>
+      <div class="relative z-10">
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-yellow-300">Guide Médical — Les Héritiers</h1>
+        <p class="mt-3 max-w-3xl text-sm sm:text-base text-neutral-300/90">
+          Un manuel clair et opérationnel pour les médecins, soldats et citoyens de l'Empire. Recherchez un médicament, cochez des symptômes, suivez un protocole — le tout dans une interface rapide, imprimable et prête en jeu.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <a href="#checker" class="rounded-2xl bg-yellow-500/10 px-4 py-2 text-yellow-300 ring-1 ring-yellow-500/30 hover:bg-yellow-500/20">Symptom Checker</a>
+          <a href="#protocoles" class="rounded-2xl bg-neutral-800 px-4 py-2 text-neutral-200 ring-1 ring-neutral-700 hover:bg-neutral-700">Protocoles rapides</a>
+          <button id="btn-print" class="rounded-2xl bg-neutral-900 px-4 py-2 text-neutral-200 ring-1 ring-neutral-700 hover:bg-neutral-700">Imprimer</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="mt-8 grid gap-6 lg:grid-cols-[260px,1fr]">
+      <!-- NAV -->
+      <aside class="hidden lg:block">
+        <nav class="sticky top-6 space-y-2">
+          <div class="rounded-2xl border border-neutral-800 bg-neutral-950 p-3">
+            <h3 class="mb-2 text-sm font-semibold text-neutral-300">Navigation</h3>
+            <ul class="space-y-1 text-sm">
+              <li><a href="#howto" class="block rounded-lg px-2 py-1.5 text-neutral-300 hover:bg-neutral-800 hover:text-yellow-200">Guides pas à pas</a></li>
+              <li><a href="#catalogue" class="block rounded-lg px-2 py-1.5 text-neutral-300 hover:bg-neutral-800 hover:text-yellow-200">Catalogue</a></li>
+              <li><a href="#checker" class="block rounded-lg px-2 py-1.5 text-neutral-300 hover:bg-neutral-800 hover:text-yellow-200">Symptômes</a></li>
+              <li><a href="#protocoles" class="block rounded-lg px-2 py-1.5 text-neutral-300 hover:bg-neutral-800 hover:text-yellow-200">Protocoles</a></li>
+            </ul>
+          </div>
+
+          <div class="rounded-2xl border border-yellow-900/40 bg-yellow-950/10 p-3">
+            <h3 class="mb-2 text-sm font-semibold text-yellow-300">Astuce</h3>
+            <p class="text-xs text-yellow-200/90">Cliquez sur « Copier la classe » pour partager rapidement les références d'objets avec votre équipe médicale.</p>
+          </div>
+          <div class="rounded-2xl border border-neutral-800 bg-neutral-950 p-3">
+            <h3 class="mb-2 text-sm font-semibold text-neutral-300">Mode compact</h3>
+            <p class="text-xs text-neutral-400">La page est responsive et lisible sur un second écran ou un navigateur en arrière-plan pendant vos interventions.</p>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- MAIN -->
+      <main>
+        <!-- HOWTO -->
+        <section id="howto" class="mt-2">
+          <div class="mb-4">
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-wide text-yellow-300 drop-shadow">Guides pas à pas</h2>
+            <p class="mt-1 text-sm text-neutral-300/80">Comment faire — procédures détaillées et logiques d'utilisation.</p>
+          </div>
+
+          <!-- Collapsible blocks -->
+          <div class="space-y-3" id="howto-blocks">
+            <!-- Injected by JS below to keep code clean and consistent with the React version -->
+          </div>
+        </section>
+
+        <!-- CATALOGUE -->
+        <section class="mt-8" id="catalogue">
+          <div class="mb-4">
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-wide text-yellow-300 drop-shadow">Catalogue complet</h2>
+            <p class="mt-1 text-sm text-neutral-300/80">Tous les médicaments, outils et vaccins du mod — filtrables et recherchables.</p>
+          </div>
+
+          <div class="sticky top-0 z-10 -mx-4 mb-4 rounded-xl border border-neutral-800 bg-neutral-900/70 p-3 backdrop-blur supports-[backdrop-filter]:bg-neutral-900/50">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <input id="q" placeholder="Rechercher (nom, classe, section…)" class="w-full rounded-lg border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 outline-none placeholder:text-neutral-500 focus:border-yellow-500" />
+              <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                <select id="f-section" class="rounded-lg border border-neutral-700 bg-neutral-900 px-2 py-2 text-sm">
+                  <option value="">Toutes sections</option>
+                </select>
+                <select id="f-form" class="rounded-lg border border-neutral-700 bg-neutral-900 px-2 py-2 text-sm">
+                  <option value="">Toutes formes</option>
+                </select>
+                <select id="f-level" class="rounded-lg border border-neutral-700 bg-neutral-900 px-2 py-2 text-sm">
+                  <option value="">Tous niveaux</option>
+                  <option value="1">Niveau 1</option>
+                  <option value="2">Niveau 2</option>
+                  <option value="3">Niveau 3</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="catalogue-content" class="space-y-8"></div>
+        </section>
+
+        <!-- CHECKER -->
+        <section id="checker" class="mt-10">
+          <div class="mb-4">
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-wide text-yellow-300 drop-shadow">Symptom Checker</h2>
+            <p class="mt-1 text-sm text-neutral-300/80">Cochez ce que le patient présente et obtenez les traitements recommandés.</p>
+          </div>
+          <div class="grid gap-4 lg:grid-cols-3">
+            <div class="lg:col-span-2 space-y-3">
+              <div class="rounded-2xl border border-neutral-800 p-4">
+                <div id="symptom-buttons" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2"></div>
+              </div>
+              <div class="rounded-2xl border border-neutral-800 p-4">
+                <h4 class="font-semibold mb-2">Conseils cliniques RP</h4>
+                <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+                  <li><b>Sécuriser</b> la zone → gants, masque; mains et outils <b>désinfectés</b>.</li>
+                  <li><b>Stabiliser</b>: arrêter le saignement (bandage hémostatique / hémostase médicamenteuse), évaluer le choc.</li>
+                  <li><b>Traiter</b>: extraction/plaie (kits chirurgicaux), sutures, antibiotiques si risque infectieux, antalgiques selon douleur.</li>
+                  <li><b>Surveiller</b>: température, vomissements, état mental, signes de sepsis; prévoir <b>revaccination</b> si nécessaire.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <div class="rounded-2xl border border-yellow-900/40 bg-yellow-950/10 p-4">
+                <h4 class="mb-2 text-lg font-bold text-yellow-300">Traitements suggérés</h4>
+                <div id="suggested" class="space-y-3"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PROTOCOLES -->
+        <section id="protocoles" class="mt-10">
+          <div class="mb-4">
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-wide text-yellow-300 drop-shadow">Protocoles rapides</h2>
+            <p class="mt-1 text-sm text-neutral-300/80">Raccourcis opérationnels par cas fréquents.</p>
+          </div>
+          <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+            <li><b>Balistique</b> : hémostatique &gt; hémostase médicamenteuse &gt; chirurgie (kit) &gt; suture &gt; antibio (si risque) &gt; antalgie.</li>
+            <li><b>Sepsis</b> : désinfection stricte → antibiotiques N3 (Flemoclav/Imipénem/Amoxiclav inj/Topo inj) → surveillance.</li>
+            <li><b>Intox chimique</b> : évacuation + masque → AntiChem (N3) / Neirocetal (N2) → monitoring.</li>
+          </ul>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="mt-16 rounded-2xl border border-neutral-800 bg-neutral-950 p-6 text-sm text-neutral-400">
+          <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <p>© <span id="year"></span> — Les Héritiers • Guide Médical RP</p>
+            <div class="flex flex-wrap gap-2"><span class="text-neutral-500">Version imprimable via Ctrl/Cmd+P</span></div>
+          </div>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+  const cls = (...a)=>a.filter(Boolean).join(' ');
+  const formatSec = (s)=>{
+    if(s===undefined||s===null||s==='-') return '—';
+    const n = typeof s==='string'? parseFloat(s): s; if(!isFinite(n)) return '—';
+    if(n<90) return Math.round(n)+' s';
+    if(n<3600) return Math.round(n/60)+' min';
+    return Math.round(n/3600)+' h';
+  };
+
+  const FORMS = ["Comprimés","Ampoule","Injecteur","Onguent","Désinfection","Outils","Trousse","Kit","Boisson","Bouteille","Universel"];
+  const SECTIONS = ["Prophylaxie & Traitements","État Physique","Infections & Maladies","Symptômes","États Émotionnels"];
+
+  const DATA = [
+    { section:"Prophylaxie & Traitements", sousSection:"Vaccins", name:"Vaxicam", item:"TerjeAmpouleVaxicam", stage:"Vaccin", form:"Ampoule", duration:14400, overdose:0.8 },
+    { section:"Prophylaxie & Traitements", sousSection:"Vaccins", name:"Zerivax", item:"TerjeAmpouleZerivax", stage:"Vaccin", form:"Ampoule", duration:7200, overdose:1.5 },
+    { section:"Prophylaxie & Traitements", sousSection:"Vaccins", name:"Rabivax", item:"TerjeAmpouleRabivax", stage:"Vaccin", form:"Ampoule", duration:14400, overdose:1.3 },
+    { section:"Prophylaxie & Traitements", sousSection:"Désinfection", name:"Teinture alcoolique", item:"DisinfectantAlcohol", stage:"Désinfection", form:"Désinfection" },
+    { section:"Prophylaxie & Traitements", sousSection:"Désinfection", name:"Spray désinfectant", item:"DisinfectantSpray", stage:"Désinfection", form:"Désinfection" },
+
+    { section:"État Physique", sousSection:"Hématomes", name:"Viprosal", item:"TerjeSalveViprosal", stage:"Traitement", form:"Onguent", duration:300, overdose:0.0 },
+    { section:"État Physique", sousSection:"Hématomes", name:"Capsicum", item:"TerjeSalveCapsicum", stage:"Traitement", form:"Onguent", duration:400, overdose:0.0 },
+    { section:"État Physique", sousSection:"Hématomes", name:"Finalgon", item:"TerjeSalveFinalgon", stage:"Traitement", form:"Onguent", duration:600, overdose:0.0 },
+
+    { section:"État Physique", sousSection:"Chirurgie/Extraction (Organes/Balle/Perforation)", name:"Bol médical + instruments (Céramique)", item:"TerjeSurgicalTool_Ceramic", stage:"Outils", form:"Outils", volume:1, notes:"Chances de soin : Organes 0.05/90, Balle 0.2/40, Perforation 0.4/30" },
+    { section:"État Physique", sousSection:"Chirurgie/Extraction (Organes/Balle/Perforation)", name:"Bol médical + instruments (Blanc)", item:"TerjeSurgicalTool_White", stage:"Outils", form:"Outils", volume:1, notes:"Chances de soin : Organes 0.05/90, Balle 0.2/40, Perforation 0.4/30" },
+    { section:"État Physique", sousSection:"Chirurgie/Extraction (Organes/Balle/Perforation)", name:"Kit chirurgical de campagne", item:"TerjeSurgicalKit", stage:"Kit", form:"Kit", volume:5, notes:"Chances de soin : Organes 0.2/40, Balle 0.5/25, Perforation 0.7/20" },
+    { section:"État Physique", sousSection:"Chirurgie/Extraction (Organes/Balle/Perforation)", name:"IFAK (Noir)", item:"TerjeFirstAidKitIndividual_Black", stage:"Trousse universelle", form:"Trousse", volume:10, notes:"Chances de soin : Organes 0.3/40, Balle 0.6/30, Perforation 0.8/20" },
+    { section:"État Physique", sousSection:"Chirurgie/Extraction (Organes/Balle/Perforation)", name:"AFAK (Noir)", item:"TerjeFirstAidKitAdvance_Black", stage:"Trousse universelle", form:"Trousse", volume:20, notes:"Chances de soin : Organes 0.3/40, Balle 0.6/30, Perforation 0.8/20" },
+
+    { section:"État Physique", sousSection:"Commotion cérébrale", name:"Noopept", item:"TerjePillsNoopept", stage:"Traitement", form:"Comprimés", duration:380, overdose:0.35 },
+    { section:"État Physique", sousSection:"Commotion cérébrale", name:"Neirox (ampoule)", item:"TerjeAmpouleNeirox", stage:"Traitement", form:"Ampoule", duration:600, overdose:0.6 },
+    { section:"État Physique", sousSection:"Commotion cérébrale", name:"Neirox (injecteur)", item:"TerjeInjectorNeirox", stage:"Traitement", form:"Injecteur", duration:500, overdose:0.3 },
+
+    { section:"État Physique", sousSection:"Hémostase (ralentir saignement)", name:"Vikasol", item:"TerjePillsVikasol", stage:"Traitement", level:1, form:"Comprimés", duration:300, overdose:0.15 },
+    { section:"État Physique", sousSection:"Hémostase (ralentir saignement)", name:"Erytromixelin", item:"TerjeInjectorErytromixelin", stage:"Traitement", level:3, form:"Injecteur", duration:300, overdose:0.32 },
+
+    { section:"État Physique", sousSection:"Hématopoïèse (regen de sang)", name:"Irovit", item:"TerjePillsIrovit", stage:"Traitement", level:1, form:"Comprimés", duration:120, overdose:0.3 },
+    { section:"État Physique", sousSection:"Hématopoïèse (regen de sang)", name:"Sulfate de Magnésium", item:"TerjePillsMagnesiumSulfate", stage:"Traitement", level:1, form:"Comprimés", duration:120, overdose:0.3 },
+    { section:"État Physique", sousSection:"Hématopoïèse (regen de sang)", name:"Erythropoétine (ampoule)", item:"TerjeAmpouleErythropoetin", stage:"Traitement", level:1, form:"Ampoule", duration:600, overdose:0.4 },
+    { section:"État Physique", sousSection:"Hématopoïèse (regen de sang)", name:"Erythropoétine (injecteur)", item:"TerjeInjectorErythropoietin", stage:"Traitement", level:1, form:"Injecteur", duration:900, overdose:0.4 },
+    { section:"État Physique", sousSection:"Hématopoïèse (regen de sang)", name:"Erytromixelin", item:"TerjeInjectorErytromixelin", stage:"Traitement", level:2, form:"Injecteur", duration:300, overdose:0.32 },
+
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Tétracycline", item:"TetracyclineAntibiotics", stage:"Traitement", level:1, form:"Comprimés", duration:300, overdose:0.45 },
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Paracétamol", item:"TerjePillsParacetamol", stage:"Traitement", level:1, form:"Comprimés", duration:200, overdose:0.45 },
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Amibaktam", item:"TerjePillsAmibaktam", stage:"Traitement", level:1, form:"Comprimés", duration:60, overdose:0.05 },
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Ibuprofène", item:"TerjePillsIbuprofen", stage:"Traitement", level:2, form:"Comprimés", duration:300, overdose:0.35 },
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Nurofen", item:"TerjePillsNurofen", stage:"Traitement", level:2, form:"Comprimés", duration:300, overdose:0.52 },
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Amoxiclav (comprimés)", item:"TerjePillsAmoxiclav", stage:"Traitement", level:2, form:"Comprimés", duration:1200, overdose:0.75 },
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Pipéracilline", item:"TerjePillsPiperacylin", stage:"Traitement", level:2, form:"Comprimés", duration:1100, overdose:0.45 },
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Ketarol (ampoule)", item:"TerjeAmpouleKetarol", stage:"Traitement", level:2, form:"Ampoule", duration:1200, overdose:0.5 },
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Amoxivan (ampoule)", item:"TerjeAmpouleAmoxivan", stage:"Traitement", level:2, form:"Ampoule", duration:900, overdose:0.3 },
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Topoisomérase (injecteur)", item:"TerjeInjectorTopoizomeraza", stage:"Traitement", level:3, form:"Injecteur", duration:900, overdose:0.65 },
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Imipénem (ampoule)", item:"TerjeAmpouleImipenem", stage:"Traitement", level:3, form:"Ampoule", duration:900, overdose:0.7 },
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Flemoclave (ampoule)", item:"TerjeAmpouleFlemoclav", stage:"Traitement", level:3, form:"Ampoule", duration:1200, overdose:0.8 },
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Amoxiclav (injecteur)", item:"TerjeInjectorAmoxiclav", stage:"Traitement", level:3, form:"Injecteur", duration:1800, overdose:0.6 },
+    { section:"Infections & Maladies", sousSection:"Rhume / Pneumonie", name:"Vaxicam (vaccin)", item:"TerjeAmpouleVaxicam", stage:"Vaccin", form:"Ampoule", duration:14400, overdose:0.8 },
+
+    { section:"Infections & Maladies", sousSection:"Intoxication alimentaire", name:"Charbon (charcoal)", item:"CharcoalTablets", stage:"Traitement", level:1, form:"Comprimés", duration:300, overdose:0.01 },
+    { section:"Infections & Maladies", sousSection:"Intoxication alimentaire", name:"Polysorb", item:"TerjePillsPolisorb", stage:"Traitement", level:1, form:"Comprimés", duration:300, overdose:0.05 },
+    { section:"Infections & Maladies", sousSection:"Intoxication alimentaire", name:"Phthalazole", item:"TerjePillsFtalazol", stage:"Traitement", level:1, form:"Comprimés", duration:1200, overdose:0.25 },
+    { section:"Infections & Maladies", sousSection:"Intoxication alimentaire", name:"Mesalazine", item:"TerjePillsMesalazin", stage:"Traitement", level:2, form:"Comprimés", duration:600, overdose:0.35 },
+    { section:"Infections & Maladies", sousSection:"Intoxication alimentaire", name:"Chélateurs (tablettes)", item:"ChelatingTablets", stage:"Traitement", level:2, form:"Comprimés", duration:600, overdose:0.6 },
+    { section:"Infections & Maladies", sousSection:"Intoxication alimentaire", name:"Métoclopramide (ampoule)", item:"TerjeAmpouleMetoclopramid", stage:"Traitement", level:2, form:"Ampoule", duration:1200, overdose:0.4 },
+    { section:"Infections & Maladies", sousSection:"Intoxication alimentaire", name:"Heptral (ampoule)", item:"TerjeAmpouleHeptral", stage:"Traitement", level:3, form:"Ampoule", duration:600, overdose:0.6 },
+    { section:"Infections & Maladies", sousSection:"Intoxication alimentaire", name:"Stomaproxidal (injecteur)", item:"TerjeInjectorStomaproxidal", stage:"Traitement", level:3, form:"Injecteur", duration:900, overdose:0.68 },
+
+    { section:"Infections & Maladies", sousSection:"Intoxication chimique", name:"Rombiopental", item:"TerjePillsRombiopental", stage:"Traitement", level:1, form:"Comprimés", duration:30, overdose:0.15 },
+    { section:"Infections & Maladies", sousSection:"Intoxication chimique", name:"Neirocetal (ampoule)", item:"TerjeAmpouleNeirocetal", stage:"Traitement", level:2, form:"Ampoule", duration:500, overdose:1.25 },
+    { section:"Infections & Maladies", sousSection:"Intoxication chimique", name:"AntiChem (injecteur)", item:"AntiChemInjector", stage:"Traitement", level:3, form:"Injecteur", duration:180, overdose:1.1 },
+
+    { section:"Infections & Maladies", sousSection:"Virus Zombie", name:"Zivirol (ampoule)", item:"TerjeAmpouleZivirol", stage:"Traitement", form:"Ampoule", duration:1000, overdose:2.35 },
+    { section:"Infections & Maladies", sousSection:"Virus Zombie", name:"Zivirol (injecteur)", item:"TerjeInjectorZivirol", stage:"Traitement", form:"Injecteur", duration:1200, overdose:2.5 },
+    { section:"Infections & Maladies", sousSection:"Virus Zombie", name:"Zerivax (vaccin)", item:"TerjeAmpouleZerivax", stage:"Vaccin", form:"Ampoule", duration:7200, overdose:1.5 },
+
+    { section:"Infections & Maladies", sousSection:"Septicémie (Sepsis)", name:"Flemoclav (ampoule)", item:"TerjeAmpouleFlemoclav", stage:"Traitement", level:3, form:"Ampoule", duration:1200, overdose:0.8 },
+    { section:"Infections & Maladies", sousSection:"Septicémie (Sepsis)", name:"Imipénem (ampoule)", item:"TerjeAmpouleImipenem", stage:"Traitement", level:3, form:"Ampoule", duration:900, overdose:0.7 },
+    { section:"Infections & Maladies", sousSection:"Septicémie (Sepsis)", name:"Amoxiclav (injecteur)", item:"TerjeInjectorAmoxiclav", stage:"Traitement", level:3, form:"Injecteur", duration:300, overdose:0.6 },
+    { section:"Infections & Maladies", sousSection:"Septicémie (Sepsis)", name:"Topoisomérase (injecteur)", item:"TerjeInjectorTopoizomeraza", stage:"Traitement", level:3, form:"Injecteur", duration:600, overdose:0.65 },
+
+    { section:"Infections & Maladies", sousSection:"Rage (morsures)", name:"Rifampicine (ampoule)", item:"TerjeAmpouleRifampicyne", stage:"Traitement", level:3, form:"Ampoule", duration:300, overdose:1.35 },
+    { section:"Infections & Maladies", sousSection:"Rage (morsures)", name:"Rabinoline (ampoule)", item:"TerjeAmpouleRabinoline", stage:"Traitement", level:2, form:"Ampoule", duration:600, overdose:0.8 },
+    { section:"Infections & Maladies", sousSection:"Rage (morsures)", name:"Rabinucoline (injecteur)", item:"TerjeInjectorRabinucoline", stage:"Traitement", level:3, form:"Injecteur", duration:900, overdose:1.46 },
+
+    { section:"Symptômes", sousSection:"Douleur", name:"Codéine", item:"PainkillerTablets", stage:"Traitement", level:1, form:"Comprimés", duration:300, overdose:0.2 },
+    { section:"Symptômes", sousSection:"Douleur", name:"Analgin", item:"TerjePillsAnalgin", stage:"Traitement", level:1, form:"Comprimés", duration:500, overdose:0.15 },
+    { section:"Symptômes", sousSection:"Douleur", name:"Nimésulide", item:"TerjePillsNimesulid", stage:"Traitement", level:1, form:"Comprimés", duration:600, overdose:0.25 },
+    { section:"Symptômes", sousSection:"Douleur", name:"Paracétamol", item:"TerjePillsParacetamol", stage:"Traitement", level:1, form:"Comprimés", duration:200, overdose:0.45 },
+    { section:"Symptômes", sousSection:"Douleur", name:"Ibuprofène", item:"TerjePillsIbuprofen", stage:"Traitement", level:1, form:"Comprimés", duration:600, overdose:0.35 },
+    { section:"Symptômes", sousSection:"Douleur", name:"Nurofen", item:"TerjePillsNurofen", stage:"Traitement", level:1, form:"Comprimés", duration:350, overdose:0.52 },
+    { section:"Symptômes", sousSection:"Douleur", name:"Noopept", item:"TerjePillsNoopept", stage:"Traitement", level:1, form:"Comprimés", duration:380, overdose:0.35 },
+    { section:"Symptômes", sousSection:"Douleur", name:"Ketarol (ampoule)", item:"TerjeAmpouleKetarol", stage:"Traitement", level:1, form:"Ampoule", duration:1200, overdose:0.5 },
+    { section:"Symptômes", sousSection:"Douleur", name:"Novocaïne (ampoule)", item:"TerjeAmpouleNovacaine", stage:"Traitement", level:2, form:"Ampoule", duration:1200, overdose:0.4 },
+    { section:"Symptômes", sousSection:"Douleur", name:"Morphinocin (ampoule)", item:"TerjeAmpouleMorphine", stage:"Traitement", level:3, form:"Ampoule", duration:850, overdose:0.52 },
+    { section:"Symptômes", sousSection:"Douleur", name:"Hexobarbital (ampoule)", item:"TerjeAmpouleGexobarbital", stage:"Traitement", level:3, form:"Ampoule", duration:900, overdose:0.65 },
+    { section:"Symptômes", sousSection:"Douleur", name:"Reanimatal (injecteur)", item:"TerjeInjectorReanimatal", stage:"Traitement", level:1, form:"Injecteur", duration:240, overdose:1.85 },
+    { section:"Symptômes", sousSection:"Douleur", name:"Morphine (injecteur)", item:"Morphine", stage:"Traitement", level:3, form:"Injecteur", duration:300, overdose:0.75 },
+    { section:"Symptômes", sousSection:"Douleur", name:"Promidol (injecteur)", item:"TerjeInjectorPromidol", stage:"Traitement", level:3, form:"Injecteur", duration:600, overdose:0.45 },
+
+    { section:"Symptômes", sousSection:"Surdose", name:"Eau (boire)", item:"WaterBottle", stage:"Traitement", level:1, form:"Bouteille", duration:300, overdose:0.0 },
+
+    { section:"États Émotionnels", sousSection:"Sommeil/Repos", name:"MadBull®", item:"TerjeDrinkMadBull", stage:"Récupération", level:8, form:"Boisson", duration:1.0, overdose:0.0 },
+    { section:"États Émotionnels", sousSection:"Sommeil/Repos", name:"Gang®", item:"TerjeDrinkGang", stage:"Récupération", level:6, form:"Boisson", duration:1.0, overdose:0.0 },
+    { section:"États Émotionnels", sousSection:"Sommeil/Repos", name:"Yaguar®", item:"TerjeDrinkYaguar", stage:"Récupération", level:10, form:"Boisson", duration:1.0, overdose:0.0 },
+    { section:"États Émotionnels", sousSection:"Sommeil/Repos", name:"PrayBoy®", item:"TerjeDrinkPrayboy", stage:"Récupération", level:4, form:"Boisson", duration:1.0, overdose:0.0 },
+    { section:"États Émotionnels", sousSection:"Sommeil/Repos", name:"6Energy®", item:"TerjeDrink6Energy", stage:"Récupération", level:8, form:"Boisson", duration:0.8, overdose:0.0 },
+
+    { section:"États Émotionnels", sousSection:"Santé mentale", name:"Adepress", item:"TerjePillsAdepress", stage:"Traitement", level:1, form:"Comprimés", duration:150, overdose:0.2 },
+    { section:"États Émotionnels", sousSection:"Santé mentale", name:"Agteminol", item:"TerjePillsAgteminol", stage:"Traitement", level:1, form:"Comprimés", duration:120, overdose:0.2 },
+    { section:"États Émotionnels", sousSection:"Santé mentale", name:"Venlafaxine", item:"TerjePillsVenlafaxine", stage:"Traitement", level:1, form:"Comprimés", duration:250, overdose:0.3 },
+    { section:"États Émotionnels", sousSection:"Santé mentale", name:"Actaparoxétine (ampoule)", item:"TerjeAmpouleActaparoxetine", stage:"Traitement", level:2, form:"Ampoule", duration:400, overdose:0.4 },
+    { section:"États Émotionnels", sousSection:"Santé mentale", name:"Amitriptyline (ampoule)", item:"TerjeAmpouleAmitriptyline", stage:"Traitement", level:3, form:"Ampoule", duration:600, overdose:0.4 },
+    { section:"États Émotionnels", sousSection:"Santé mentale", name:"Metralindole (ampoule)", item:"TerjeAmpouleMetralindole", stage:"Traitement", level:2, form:"Ampoule", duration:300, overdose:0.1 },
+    { section:"États Émotionnels", sousSection:"Santé mentale", name:"Amfitalicyne (injecteur)", item:"TerjeInjectorAmfitalicyne", stage:"Traitement", level:3, form:"Injecteur", duration:520, overdose:0.6 }
+  ];
+
+  const SYMPTOM_MAP = {
+    'Douleur': ["Codéine","Analgin","Nimésulide","Ibuprofène","Morphine (injecteur)","Promidol (injecteur)"],
+    'Saignement fort': ["Vikasol","Erytromixelin"],
+    'Hématomes': ["Viprosal","Capsicum","Finalgon"],
+    'Commotion': ["Noopept","Neirox (ampoule)","Neirox (injecteur)"],
+    'Intox alimentaire': ["Charbon (charcoal)","Polysorb","Phthalazole","Mesalazine","Chélateurs (tablettes)","Métoclopramide (ampoule)"],
+    'Intox chimique': ["Rombiopental","Neirocetal (ampoule)","AntiChem (injecteur)"],
+    'Rhume/Pneumonie': ["Tétracycline","Amoxivan (ampoule)","Imipénem (ampoule)","Topoisomérase (injecteur)","Amoxiclav (comprimés)","Amoxiclav (injecteur)","Vaxicam (vaccin)"],
+    'Septicémie': ["Flemoclav (ampoule)","Imipénem (ampoule)","Amoxiclav (injecteur)","Topoisomérase (injecteur)"],
+    'Virus Zombie': ["Zivirol (injecteur)","Zivirol (ampoule)","Zerivax (vaccin)"],
+    'Rage (morsure)': ["Rabinoline (ampoule)","Rabinucoline (injecteur)","Rifampicine (ampoule)","Rabivax"],
+    'Surdose': ["Eau (boire)"],
+    'Panique/Hallucinations': ["Adepress","Agteminol","Venlafaxine","Actaparoxétine (ampoule)","Amitriptyline (ampoule)","Amfitalicyne (injecteur)"]
+  };
+
+  // ---------- UI helpers ----------
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  document.getElementById('btn-print').onclick = ()=>window.print();
+
+  function chip(text){
+    return `<span class="inline-flex items-center gap-1 rounded-full border border-yellow-500/30 px-2 py-0.5 text-[11px] font-medium text-yellow-300 bg-yellow-950/20">${text}</span>`;
+  }
+  function tag(text, icon){
+    return `<span class="inline-flex items-center gap-1 rounded-md bg-neutral-800/70 px-2 py-1 text-xs text-neutral-200">${icon?`<span class="opacity-80">${icon}</span>`:''}${text}</span>`;
+  }
+  function medCard(m){
+    const id = (m.id || `${m.sousSection}-${m.name}`).toLowerCase().replace(/[^a-z0-9]+/g,'-');
+    const favKey = `medfav:${id}`;
+    const fav = localStorage.getItem(favKey)==='1';
+    const chips = [
+      (m.level!=null? chip(`Niveau ${m.level}`):''),
+      (m.stage? chip(m.stage):''),
+      chip(m.form),
+      (m.duration!=null? chip(`Durée ${formatSec(m.duration)}`):''),
+      (m.overdose!=null? chip(`Overdose ${m.overdose}`):''),
+      (m.volume!=null? chip(`Volume ${m.volume}`):''),
+    ].filter(Boolean).join('');
+    return `<div class="group rounded-2xl border border-neutral-800 bg-gradient-to-b from-neutral-900/80 to-neutral-950/80 p-4 shadow-[0_0_0_1px_rgba(255,255,255,0.02)_inset] transition hover:shadow-yellow-500/10">
+      <div class="mb-2 flex items-start justify-between gap-2">
+        <div>
+          <h3 class="text-base sm:text-lg font-bold text-neutral-100 tracking-wide">${m.name}</h3>
+          <div class="mt-1 flex flex-wrap gap-2">${chips}</div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button class="btn-copy rounded-md border border-neutral-700 bg-neutral-800 px-2 py-1 text-[11px] text-neutral-200 hover:bg-neutral-700" data-copy="${m.item}">Copier la classe</button>
+          <button class="btn-fav ${fav?'border-yellow-400 text-yellow-300':'border-neutral-700 text-neutral-400 hover:text-neutral-200'} ml-1 inline-flex h-6 w-6 items-center justify-center rounded-full border" data-favkey="${favKey}">★</button>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 text-[12px] text-neutral-300/90">
+        ${tag(`Classe : <span class='ml-1 font-mono text-[11px]'>${m.item}</span>`, '🎮')}
+        ${tag(`Conditionnement : ${m.packaging || '—'}`, '📦')}
+        ${m.notes? tag(m.notes,'📝'):''}
+      </div>
+    </div>`;
+  }
+
+  // ---------- HOWTO blocks ----------
+  const howtoBlocks = [
+    {title:'💊 Médicaments — comment les utiliser (comprimés, ampoules, injecteurs)', html:`
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li><b>Comprimés</b> — premiers stades ou prévention. Chaque boîte = 10 comprimés, combinables. Boire un peu d'eau après prise.</li>
+        <li><b>Ampoules</b> — molécules puissantes pour maladies complexes. <b>Nécessitent une seringue</b>.</li>
+        <li class="pl-2">Après chaque injection avec <b>seringue</b> : la seringue devient <b>souillée</b> ⇒ la <u>désinfecter</u> (alcool) ou la <u>faire bouillir</u> 2 min.</li>
+        <li><b>Injecteurs</b> — prêts à l'emploi, <b>usage unique</b> (ne se réutilisent pas). Idéals en urgence.</li>
+      </ul>`},
+    {title:'🛡️ Vaccins — prophylaxie et calendrier pratique', html:`
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li>Protègent contre les maladies dangereuses, réduisent fortement le risque d'infection.</li>
+        <li>À administrer <b>en amont</b> (non curatifs). Recommandation : revaccination régulière (voir durée d'effet sur les fiches).</li>
+        <li>Priorité terrain : équipe d'intervention, zones contaminées, chenils/loups ⇒ <b>Zerivax</b> (virus Z) et <b>Rabivax</b> (rage).</li>
+      </ul>`},
+    {title:'🧼 Désinfection — protocole terrain rapide', html:`
+      <ol class="list-decimal pl-6 text-sm text-neutral-300 space-y-1">
+        <li><b>Mains</b> : se frictionner à l'alcool ou spray désinfectant.</li>
+        <li><b>Outils</b> : seringues et instruments → alcool ou <b>ébullition</b> 2 minutes.</li>
+        <li><b>Plaie</b> : nettoyer/désinfecter avant pansement ou suture.</li>
+        <li><b>Surveillance</b> : si plaie sale ou ancienne, prévoir antibiotiques (voir Sepsis).</li>
+      </ol>
+      <div class="mt-3 rounded-xl border border-amber-700/50 bg-amber-500/10 p-3 text-sm">
+        <p class="font-semibold">Important</p>
+        <p>Traiter une plaie <b>sans</b> mains ou gants <b>stériles</b> augmente fortement le risque d'infection. Pense à <b>désinfecter les gants</b> ou les mains avant tout geste.</p>
+      </div>`},
+    {title:'🟣 Hématomes — quoi faire', html:`
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li>Provoqués par infectés/armes contondantes. Accumulation ⇒ baisse de santé.</li>
+        <li>Guérissent seuls; accélérer avec pommades : <b>Viprosal</b>, <b>Capsicum</b>, <b>Finalgon</b>.</li>
+      </ul>
+      <div class="mt-3 rounded-xl border border-sky-700/50 bg-sky-500/10 p-3 text-sm">
+        <p>Les <b>gilets/​casques</b> peuvent arrêter des balles : vous aurez alors un <b>hématome</b> au lieu d'une plaie par balle.</p>
+      </div>`},
+    {title:"🩸 Blessures par balles / coups de couteau / organes internes — logique d'action", html:`
+      <ol class="list-decimal pl-6 text-sm text-neutral-300 space-y-1">
+        <li><b>Bandage immédiat</b> (hémostatique &gt; bandage classique).</li>
+        <li><b>Hémostase médicamenteuse</b> si besoin : Vikasol (N1) → Erytromixelin (N3).</li>
+        <li><b>Évaluer</b> : suspicion balle/objet/saignement interne ⇒ <b>Chirurgie</b>.</li>
+        <li><b>Choisir l'outil</b> :
+          <ul class="list-disc pl-6 mt-1">
+            <li><b>Bol médical + instruments</b> (céramique/blanc) — chances <i>faibles</i> (Organes 0.05/90, Balle 0.2/40, Perforation 0.4/30).</li>
+            <li><b>Kit chirurgical</b> — chances <i>moyennes</i> (0.2/40 • 0.5/25 • 0.7/20).</li>
+            <li><b>IFAK / AFAK</b> — chances <i>élevées</i> (0.3/40 • 0.6/30 • 0.8/20).</li>
+          </ul>
+        </li>
+        <li><b>Sutures + désinfection</b> régulière, antibiotiques si risque infectieux.</li>
+      </ol>
+      <div class="mt-3 rounded-xl border border-indigo-700/50 bg-indigo-500/10 p-3 text-sm">
+        <p><b>Compétences</b> : la réussite des opérations (organe/balle/plaie) s'améliore avec les skills <b>Médecine/Chirurgie</b> et <b>Immunité</b> du mod de compétences.</p>
+      </div>`},
+    {title:'🧵 Sutures chirurgicales — pas à pas', html:`
+      <ol class="list-decimal pl-6 text-sm text-neutral-300 space-y-1">
+        <li>Désinfecter mains + instruments.</li>
+        <li>Ouvrir trousse/kit, préparer aiguilles/fil.</li>
+        <li>Fermer la plaie proprement (ne pas refermer une plaie très sale → d'abord nettoyer).</li>
+        <li>Pansement propre. Répéter désinfection à intervalles réguliers.</li>
+      </ol>`},
+    {title:'🧠 Commotion cérébrale — conduite à tenir', html:`
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li>Cause : choc/explosion; symptômes : maux de tête, vertiges, vision floue.</li>
+        <li>Repos + médication : <b>Noopept</b>, <b>Neirox</b> (ampoule/injecteur).</li>
+      </ul>`},
+    {title:'🫁 Rhume → Pneumonie — traitement & prévention', html:`
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li>Rhume simple : chaleur + Paracétamol au besoin.</li>
+        <li>Pneumonie : antibiotiques appropriés (Tétracycline → niveaux supérieurs si aggravation).</li>
+        <li>Prévenir : rester au chaud; vaccin <b>Vaxicam</b>.</li>
+      </ul>`},
+    {title:'🤢 Intoxication alimentaire — quoi faire', html:`
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li>Nausées/vomissements rapides après ingestion → <b>hydratation</b>.</li>
+        <li>Traitements : Charbon actif, Polysorb, Phthalazole, Mesalazine, Chélateurs; antiémétique <b>Metoclopramide</b>.</li>
+      </ul>`},
+    {title:'☣️ Empoisonnement chimique — protocole urgence', html:`
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li>Évacuer de la zone, masque.</li>
+        <li>Administrer <b>AntiChem</b> (N3) ou <b>Neirocetal</b> (N2), complété par <b>Rombiopental</b> (N1).</li>
+      </ul>`},
+    {title:'🧟 Virus des infectés — conduite', html:`
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li>Transmission par gouttelettes/fluides; masque + armure recommandés.</li>
+        <li>Traiter : <b>Zivirol</b> (injecteur prioritaire), puis ampoule; prophylaxie : <b>Zerivax</b>.</li>
+      </ul>`},
+    {title:'🦠 Septicémie — signes & traitement', html:`
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li>Suite à plaie ouverte/manipulation sale. Dégradation progressive de santé.</li>
+        <li>Antibiotiques <b>N3</b> : Flemoclav, Imipénem, Amoxiclav (inj), Topoisomérase (inj).</li>
+      </ul>`},
+    {title:'🐺 Rage (morsures) — stades & action', html:`
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li>Progression lente sans symptômes immédiats → surveiller.</li>
+        <li>Stades : léger → sévère → critique (fièvre, perte rapide de santé).</li>
+        <li>Traiter tôt : <b>Rabinoline</b> (N2) puis <b>Rabinucoline</b> (N3); <b>Rifampicine</b> en appui; prophylaxie <b>Rabivax</b>.</li>
+      </ul>`},
+    {title:'😣 Douleur — logique et analgésie (niveaux)', html:`
+      <p class="text-sm text-neutral-300 mb-2">La douleur résulte de traumatismes variés. Elle <b>diminue naturellement</b> avec le temps, mais peut être <b>soulagée rapidement</b> par des antalgiques du niveau correspondant (ou supérieur si douleur intense).</p>
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li><b>Léger</b> → Codéine / Analgin / Paracétamol / Ibuprofène / Nurofen / Noopept.</li>
+        <li><b>Moyen</b> → Ketarol (ampoule) / Novocaïne (ampoule) / Hexobarbital (ampoule).</li>
+        <li><b>Sévère/urgence</b> → Reanimatal (inj) / Morphine (inj) / Promidol (inj).</li>
+        <li>Surveiller la <b>sur‑dose</b> si cumul de molécules fortes.</li>
+      </ul>`},
+    {title:'💀 Surdosage — ce qui se passe, quoi faire', html:`
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li>Provoqué par excès de médicaments/substances toxiques.</li>
+        <li><b>Élimination naturelle</b> au fil du temps → favoriser l'hydratation (Eau).</li>
+        <li><b>Progression en 3 étapes</b> :
+          <ul class="list-disc pl-6 mt-1">
+            <li>1) <b>Nausées / hallucinations</b>, perception altérée.</li>
+            <li>2) <b>Perte de connaissance</b>, très vulnérable.</li>
+            <li>3) <b>État critique</b>, santé en danger.</li>
+          </ul>
+        </li>
+      </ul>`},
+    {title:'💤 Sommeil — besoins, effets et impossibilités', html:`
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li>Le personnage a <b>besoin de sommeil</b> pour maintenir santé et endurance.</li>
+        <li><b>Manque de sommeil</b> : bâillements, vision floue → risque de <b>syncope</b> si rouge.</li>
+        <li><b>Où dormir ?</b> Près d'un feu, dans une tente/maison, dans un sac de couchage (endroits chauds).</li>
+        <li><b>Impossible de dormir si</b> : <b>froid</b>, <b>affamé</b>, ou <b>maladies graves</b> (stade ≥ 2).</li>
+        <li><b>Avantages</b> : restaure rapidement <b>santé</b> et <b>sang</b>; guérit certaines <b>affections mineures</b> (ex. grippe stade 1).</li>
+      </ul>`},
+    {title:"😵‍💫 Santé mentale — causes, effets, traitement", html:`
+      <ul class="list-disc pl-6 text-sm text-neutral-300 space-y-1">
+        <li><b>Causes</b> : attaques de zombies, exposition prolongée à zones psioniques, cannibalisme.</li>
+        <li><b>Effets</b> : ruptures nerveuses, <b>hallucinations</b>, panique/désorientation → interactions plus difficiles.</li>
+        <li><b>Traitement</b> : antidépresseurs (Adepress, Agteminol, Venlafaxine) ± Actaparoxétine/Amitriptyline (ampoules) → <b>stabilisent l'esprit</b> et réduisent les effets.</li>
+      </ul>`},
+  ];
+
+  function renderHowTo(){
+    const root = document.getElementById('howto-blocks');
+    root.innerHTML = '';
+    for(const b of howtoBlocks){
+      const id = b.title.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+      const el = document.createElement('div');
+      el.className = 'rounded-xl border border-neutral-800';
+      el.innerHTML = `
+        <button class="collapser flex w-full items-center justify-between rounded-t-xl bg-neutral-900/70 px-4 py-3 text-left font-semibold text-neutral-100">
+          <span>${b.title}</span>
+          <span class="text-yellow-400">−</span>
+        </button>
+        <div class="content space-y-3 p-4">${b.html}</div>`;
+      root.appendChild(el);
+    }
+    root.querySelectorAll('.collapser').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const content = btn.parentElement.querySelector('.content');
+        const icon = btn.querySelector('span:last-child');
+        const open = !content.classList.contains('hidden');
+        content.classList.toggle('hidden');
+        icon.textContent = open? '+':'−';
+      });
+    });
+  }
+
+  // ---------- Catalogue ----------
+  function unique(arr){ return [...new Set(arr)]; }
+  function groupBy(arr, key){
+    return arr.reduce((acc, x)=>{ (acc[x[key]] ||= []).push(x); return acc; }, {});
+  }
+  function setupFilters(){
+    const s = document.getElementById('f-section');
+    const f = document.getElementById('f-form');
+    unique(SECTIONS).forEach(v=>{ const o=document.createElement('option'); o.value=v; o.textContent=v; s.appendChild(o); });
+    unique(FORMS).forEach(v=>{ const o=document.createElement('option'); o.value=v; o.textContent=v; f.appendChild(o); });
+  }
+  function renderCatalogue(){
+    const q = document.getElementById('q').value.toLowerCase();
+    const fs = document.getElementById('f-section').value;
+    const ff = document.getElementById('f-form').value;
+    const fl = document.getElementById('f-level').value;
+    const meds = DATA.filter(m=>
+      (!fs || m.section===fs) && (!ff || m.form===ff) && (!fl || String(m.level||'')===fl) &&
+      (q==='' || [m.name,m.item,m.section,m.sousSection,m.stage,String(m.level||''),m.form].join(' ').toLowerCase().includes(q))
+    );
+    const grouped = groupBy(meds, 'section');
+    const content = document.getElementById('catalogue-content');
+    content.innerHTML = '';
+    for(const [section, arr] of Object.entries(grouped)){
+      const bySub = groupBy(arr,'sousSection');
+      const sec = document.createElement('div');
+      sec.innerHTML = `<h3 class="mb-3 text-xl font-bold text-yellow-300">${section}</h3>`;
+      const wrap = document.createElement('div');
+      wrap.className = 'space-y-6';
+      for(const [sous, items] of Object.entries(bySub)){
+        const bloc = document.createElement('div');
+        bloc.innerHTML = `<h4 class="mb-2 text-lg font-semibold text-yellow-200/90">${sous}</h4>`;
+        const grid = document.createElement('div');
+        grid.className = 'grid gap-3 sm:grid-cols-2 lg:grid-cols-3';
+        grid.innerHTML = items.map(m=>medCard(m)).join('');
+        bloc.appendChild(grid); wrap.appendChild(bloc);
+      }
+      sec.appendChild(wrap); content.appendChild(sec);
+    }
+    bindCardActions();
+  }
+  function bindCardActions(){
+    document.querySelectorAll('.btn-copy').forEach(btn=>{
+      btn.addEventListener('click',async ()=>{
+        try{ await navigator.clipboard.writeText(btn.dataset.copy||''); btn.textContent='Copié !'; setTimeout(()=>btn.textContent='Copier la classe',900); }catch(e){ btn.textContent='Erreur'; }
+      });
+    });
+    document.querySelectorAll('.btn-fav').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const key = btn.dataset.favkey; const on = localStorage.getItem(key)==='1';
+        if(on) localStorage.removeItem(key); else localStorage.setItem(key,'1');
+        btn.classList.toggle('border-yellow-400');
+        btn.classList.toggle('text-yellow-300');
+      });
+    });
+  }
+
+  // ---------- Symptom checker ----------
+  function renderSymptoms(){
+    const root = document.getElementById('symptom-buttons');
+    root.innerHTML = '';
+    const all = Object.keys(SYMPTOM_MAP);
+    const selected = new Set();
+    function refreshSuggested(){
+      const meds = new Map();
+      selected.forEach(s=>{
+        for(const name of (SYMPTOM_MAP[s]||[])){
+          const found = DATA.find(m=>m.name===name);
+          if(found) meds.set(found.name, found);
+        }
+      });
+      const prio={ 'Injecteur':0, 'Ampoule':1, 'Comprimés':2 };
+      const arr = Array.from(meds.values()).sort((a,b)=>(prio[a.form]??3)-(prio[b.form]??3));
+      const box = document.getElementById('suggested');
+      box.innerHTML = arr.map(m=>medCard(m)).join('');
+      bindCardActions();
+    }
+    for(const s of all){
+      const b = document.createElement('button');
+      b.textContent = s;
+      b.className = 'rounded-lg border px-3 py-2 text-sm border-neutral-700 bg-neutral-900 text-neutral-200 hover:border-neutral-600';
+      b.addEventListener('click',()=>{
+        const on = b.classList.toggle('!border-yellow-500', !b.classList.contains('!border-yellow-500'));
+        b.classList.toggle('bg-yellow-500/10'); b.classList.toggle('text-yellow-200');
+        if(b.classList.contains('text-yellow-200')) selected.add(s); else selected.delete(s);
+        refreshSuggested();
+      });
+      root.appendChild(b);
+    }
+  }
+
+  // ---------- Init ----------
+  setupFilters();
+  renderHowTo();
+  renderCatalogue();
+  renderSymptoms();
+
+  document.getElementById('q').addEventListener('input', renderCatalogue);
+  document.getElementById('f-section').addEventListener('change', renderCatalogue);
+  document.getElementById('f-form').addEventListener('change', renderCatalogue);
+  document.getElementById('f-level').addEventListener('change', renderCatalogue);
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Les Héritiers — Accueil</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* ✅ Seule modification : image de fond */
+  body {
+    background: #0b0f14 url('./ecran_de_chargement.png') center/cover no-repeat fixed;
+  }
+</style>
+</head>
+<body class="text-neutral-100">
+  
+<div class="sticky top-0 z-40 border-b border-yellow-500/20 bg-black/70 backdrop-blur">
+  <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+    <a href="./index.html" class="text-yellow-300 font-extrabold tracking-widest uppercase text-sm">Les Héritiers</a>
+    <nav class="flex gap-2">
+      <a href="./medical.html" class="rounded-md px-3 py-1.5 text-sm text-neutral-200 ring-1 ring-neutral-700 bg-neutral-900 hover:ring-yellow-500/40 hover:text-yellow-300">Guide médical</a>
+      <a href="./crafts.html" class="rounded-md px-3 py-1.5 text-sm text-neutral-200 ring-1 ring-neutral-700 bg-neutral-900 hover:ring-yellow-500/40 hover:text-yellow-300">Métiers & crafts</a>
+    </nav>
+  </div>
+</div>
+
+  <main class="mx-auto max-w-6xl px-4">
+    <section class="mt-10 overflow-hidden rounded-3xl border border-yellow-500/30 bg-gradient-to-b from-black/80 via-neutral-950/80 to-neutral-950/80 p-6 sm:p-10 shadow-[inset_0_0_120px_rgba(255,215,130,0.05)]">
+      <div class="relative z-10">
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-yellow-300">Les Héritiers — Codex du Serveur</h1>
+        <p class="mt-3 max-w-3xl text-sm sm:text-base text-neutral-300/90">
+          Bienvenue sur le portail RP. Choisissez votre section : le <b>Guide Médical</b> complet (interactif) ou
+          le <b>Guide des Métiers & Crafts</b> relooké. L’ensemble est prêt pour GitHub Pages et partage Discord.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="./medical.html" class="rounded-xl bg-yellow-500/10 px-5 py-3 text-yellow-300 ring-1 ring-yellow-500/30 hover:bg-yellow-500/20">→ Ouvrir le Guide Médical</a>
+          <a href="./crafts.html" class="rounded-xl bg-neutral-900 px-5 py-3 text-neutral-200 ring-1 ring-neutral-700 hover:bg-neutral-800">→ Voir Métiers & Crafts</a>
+        </div>
+      </div>
+    </section>
+    <footer class="py-10 text-center text-sm text-neutral-400">© Les Héritiers</footer>
+  </main>
+</body>
+</html>

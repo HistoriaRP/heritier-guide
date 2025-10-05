@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Guide des Métiers & Crafts — Héritier</title>
+<style>
+  :root {
+    --bg: #0b0f14;
+    --panel: #0f1621;
+    --card: #111b28;
+    --ink: #e8eef5;
+    --sub: #a9bdc9;
+    --accent: #d0b36a; /* laiton / brass */
+    --ok: #86e19e;
+    --warn: #ffcf6e;
+    --muted: #6c7f8a;
+    --chip: #15212f;
+  }
+  * { box-sizing: border-box; }
+  html, body { height:100%; }
+  body {
+    margin:0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    background: radial-gradient(1200px 800px at 70% -10%, #152233 0%, var(--bg) 45%);
+    color: var(--ink);
+    line-height:1.6;
+  }
+  .wrap { max-width: 980px; margin: 40px auto 80px; padding: 0 20px; }
+  .cover {
+    background: linear-gradient(135deg, rgba(208,179,106,0.12), rgba(32,49,70,0.65));
+    border: 1px solid rgba(208,179,106,0.18);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35), inset 0 0 60px rgba(208,179,106,0.08);
+    border-radius: 24px;
+    padding: 48px;
+    text-align:center;
+  }
+  .title {
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight:800;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px 0;
+    background: linear-gradient(180deg, #fff, #d9e2ea 45%, #b7c9d6 80%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color: transparent;
+    text-shadow: 0 2px 40px rgba(208,179,106,0.12);
+  }
+  .subtitle {
+    font-size: clamp(16px, 2.4vw, 20px);
+    color: var(--sub);
+    margin-top: 6px;
+  }
+  .meta { margin-top: 16px; color: var(--muted); }
+  .toc {
+    margin: 36px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 12px;
+  }
+  .toc a {
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .toc .item {
+    background: var(--panel);
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    border-radius: 16px;
+    padding: 16px 18px;
+    transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+  }
+  .toc .item:hover { transform: translateY(-2px); border-color: rgba(208,179,106,0.35); box-shadow: 0 14px 34px rgba(0,0,0,0.45); }
+  .toc .item h3 { margin: 0; font-size: 18px; }
+  .toc .item p { margin: 6px 0 0; color: var(--sub); font-size: 14px; }
+  h2.section {
+    margin: 46px 0 18px;
+    font-size: 26px;
+    letter-spacing: .3px;
+    display:flex; align-items:center; gap:12px;
+  }
+  h2.section .badge {
+    display:inline-flex; align-items:center; justify-content:center;
+    width: 28px; height:28px; border-radius: 50%;
+    background: linear-gradient(180deg, rgba(208,179,106,0.9), rgba(120,96,49,0.9));
+    color:#111; font-weight:900;
+    box-shadow: 0 4px 18px rgba(208,179,106,0.35);
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 18px;
+    padding: 18px;
+    margin: 14px 0;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+  }
+  .card h3 { margin-top: 0; font-size: 20px; }
+  .grid {
+    display:grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 800px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+  .flow { list-style:none; padding:0; margin:0; }
+  .flow li {
+    padding: 10px 12px;
+    margin: 8px 0;
+    background: linear-gradient(180deg, rgba(21,33,47,0.95), rgba(13,19,29,0.95));
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+  }
+  .arrow { color: var(--warn); font-weight: 700; padding: 0 6px; }
+  .chip {
+    display:inline-flex; align-items:center; gap:8px;
+    background: var(--chip);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius: 999px;
+    padding: 4px 10px; margin: 2px 6px 2px 0;
+    font-size: 12.5px; color: var(--sub);
+  }
+  .chip b { color: var(--ink); }
+  .legend { display:flex; flex-wrap:wrap; gap:8px; margin-top: 10px; }
+  code {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 2px 6px; border-radius: 6px; font-size: 90%;
+  }
+  .note {
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    background: rgba(208,179,106,0.08);
+    color: var(--sub);
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  .footer {
+    text-align:center; margin-top: 40px; color: var(--muted); font-size: 14px;
+  }
+  /* Print */
+  @media print {
+    body { background: white; }
+    .cover { box-shadow:none; }
+    .toc .item { break-inside: avoid; }
+    h2.section { break-before: page; }
+  }
+</style>
+</head>
+<body class="bg-black text-neutral-100">\n  <script src="https://cdn.tailwindcss.com"></script>\n  
+<div class="sticky top-0 z-40 border-b border-yellow-500/20 bg-black/70 backdrop-blur">
+  <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+    <a href="./index.html" class="text-yellow-300 font-extrabold tracking-widest uppercase text-sm">Les Héritiers</a>
+    <nav class="flex gap-2">
+      <a href="./medical.html" class="rounded-md px-3 py-1.5 text-sm text-neutral-200 ring-1 ring-neutral-700 bg-neutral-900 hover:ring-yellow-500/40 hover:text-yellow-300">Guide médical</a>
+      <a href="./crafts.html" class="rounded-md px-3 py-1.5 text-sm text-neutral-200 ring-1 ring-neutral-700 bg-neutral-900 hover:ring-yellow-500/40 hover:text-yellow-300">Métiers & crafts</a>
+    </nav>
+  </div>
+</div>
+
+  <div class="wrap">
+    <section class="cover">
+      <h1 class="title">Guide des Métiers & Crafts — Héritier</h1>
+      <p class="subtitle">Fiches claires pour les joueurs admin : postes, stations, flux de fabrication</p>
+      <p class="meta">Version 1.0 · 05 October 2025</p>
+      <div class="legend">
+        <span class="chip">⚙️ <b>Station</b></span>
+        <span class="chip">🧰 <b>Outil</b></span>
+        <span class="chip">📦 <b>Entrées</b></span>
+        <span class="chip">🏁 <b>Résultat</b></span>
+      </div>
+      <div class="toc">
+        <a href="#forgeron" class="item">
+          <h3>🛠️ Forgeron</h3>
+          <p>Clous, têtes d’outils, meulage, trempe</p>
+        </a>
+        <a href="#menuisier" class="item">
+          <h3>🪵 Menuisier</h3>
+          <p>Meubles en planches & manches</p>
+        </a>
+        <a href="#armurier" class="item">
+          <h3>🎯 Armurier</h3>
+          <p>Silencieux universels (chaîne du tuyau)</p>
+        </a>
+        <a href="#survivaliste" class="item">
+          <h3>🏕️ Survivaliste</h3>
+          <p>Pièges, arbalète, pêche, réchaud</p>
+        </a>
+      </div>
+      <div class="note">
+        <b>Rappel :</b> les vérifications de métier ne sont pas dans les recettes (<code>CanDo() = true</code>) — le verrou est géré ailleurs (inscription des crafts / checks côté joueur).
+      </div>
+    </section>
+
+    <!-- FORGERON -->
+    <h2 id="forgeron" class="section"><span class="badge">1</span>🛠️ Forgeron</h2>
+    <div class="card">
+      <h3>Chaîne « clous »</h3>
+      <ol class="flow">
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: <code>FreezeBar_iron</code></span>
+          <span class="chip">⚙️ <b>Station</b>: <code>FreezeFurnace_Static</code> (fourneau)</span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: <code>Heritier_lingot_de_fer_chaud</code></span>
+        </li>
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: <code>Heritier_lingot_de_fer_chaud</code></span>
+          <span class="chip">⚙️ <b>Station</b>: <code>FreezeAnvil_Static</code> (enclume)</span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: <code>Heritier_boule_de_fer_chaud</code></span>
+        </li>
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: <code>Heritier_boule_de_fer_chaud</code></span>
+          <span class="chip">⚙️ <b>Station</b>: <code>FreezeAnvil_Static</code></span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: <code>Heritier_fer_taille_clous_chaud</code></span>
+        </li>
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: <code>Heritier_fer_taille_clous_chaud</code></span>
+          <span class="chip">⚙️ <b>Station</b>: <code>rag_baseitems_waterbarrel</code> (trempe)</span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: <code>Heritier_fer_taille_clous_refroidi</code></span>
+        </li>
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: <code>Heritier_fer_taille_clous_refroidi</code></span>
+          <span class="chip">⚙️ <b>Station</b>: <code>FreezeAnvil_Static</code></span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: <code>Nail</code></span>
+        </li>
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: <code>Nail</code> + <code>Paper</code></span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: <code>NailBox</code></span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>Chaîne « hachette (partie métal) »</h3>
+      <ol class="flow">
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: <code>Heritier_boule_de_fer_chaud</code></span>
+          <span class="chip">🧰 <b>Outil</b>: <code>Hammer</code></span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: tête de hache (chaud, mal taillée)</span>
+        </li>
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: tête de hache (mal taillée)</span>
+          <span class="chip">⚙️ <b>Station</b>: <code>FreezeGrindingStone_Static</code> (meule)</span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: tête de hache (chaud)</span>
+        </li>
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: tête de hache (chaud)</span>
+          <span class="chip">⚙️ <b>Station</b>: <code>rag_baseitems_waterbarrel</code></span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: tête de hache (refroidie)</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>Chaîne « marteau »</h3>
+      <ol class="flow">
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: <code>Heritier_boule_de_fer_chaud</code></span>
+          <span class="chip">⚙️ <b>Station</b>: <code>FreezeAnvil_Static</code></span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: tête de marteau (chaude, mal taillée)</span>
+        </li>
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: tête de marteau (chaude, mal taillée)</span>
+          <span class="chip">⚙️ <b>Station</b>: <code>rag_baseitems_waterbarrel</code></span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: tête de marteau (mal taillée, refroidie)</span>
+        </li>
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: tête de marteau (mal taillée)</span>
+          <span class="chip">⚙️ <b>Station</b>: <code>FreezeGrindingStone_Static</code></span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: tête de marteau (affûtée)</span>
+        </li>
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: <code>Heritier_Manche</code> + tête de marteau</span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: <code>Hammer</code></span>
+        </li>
+      </ol>
+      <div class="note">Le manche peut être fabriqué côté Menuisier (voir plus bas).</div>
+    </div>
+
+    <div class="card">
+      <h3>Chaîne « scie »</h3>
+      <ol class="flow">
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: <code>Heritier_lingot_de_fer_chaud</code></span>
+          <span class="chip">⚙️ <b>Station</b>: <code>FreezeAnvil_Static</code></span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: <code>Heritier_baton_de_fer_chaud</code></span>
+        </li>
+        <li>
+          <span class="chip">📦 <b>Entrées</b>: <code>Heritier_baton_de_fer_chaud</code></span>
+          <span class="chip">🧰 <b>Outil</b>: <code>Whetstone</code> (pierre à aiguiser)</span><br/>
+          <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: <code>HandSaw</code></span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>Chaîne « pierre à aiguiser »</h3>
+      <ol class="flow">
+        <li><span class="chip">📦 <b>Entrées</b>: <code>Stone</code></span>
+            <span class="chip">⚙️ <b>Station</b>: <code>FreezeGrindingStone_Static</code></span><br/>
+            <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: <code>SmallStone</code></span>
+        </li>
+        <li><span class="chip">📦 <b>Entrées</b>: <code>SmallStone</code></span>
+            <span class="chip">⚙️ <b>Station</b>: <code>FreezeGrindingStone_Static</code></span><br/>
+            <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: <code>StoneKnife</code></span>
+        </li>
+        <li><span class="chip">📦 <b>Entrées</b>: <code>StoneKnife</code></span>
+            <span class="chip">⚙️ <b>Station</b>: <code>FreezeGrindingStone_Static</code></span><br/>
+            <span class="arrow">→</span> <span class="chip">🏁 <b>Résultat</b>: <code>Whetstone</code></span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>Autres forges</h3>
+      <ul class="flow">
+        <li><span class="chip">📦 Manche + tête de hache</span> <span class="arrow">→</span> <span class="chip">🏁 <b>Merlin</b> (<code>WoodAxe</code>)</span></li>
+        <li><span class="chip">📦 Bâton de fer chaud + Boule de fer chaude</span> <span class="arrow">→</span> <span class="chip">🏁 <b>Tenaille</b> (<code>QDLY_Pliers_01</code>)</span></li>
+      </ul>
+    </div>
+
+    <!-- MENUISIER -->
+    <h2 id="menuisier" class="section"><span class="badge">2</span>🪵 Menuisier</h2>
+    <div class="card">
+      <h3>Meubles & kits (planches + marteau QDLY_01)</h3>
+      <div class="grid">
+        <ul class="flow">
+          <li>Commode → <code>rag_baseitems_big_drawer_cabinet_darkwood_kit</code></li>
+          <li>Table d’appoint → <code>rag_baseitems_side_table_wood_kit</code></li>
+          <li>Table de canapé (victorienne) → <code>rag_baseitems_victorian_table_wood_kit</code></li>
+          <li>Caisse de munitions (bois) → <code>rag_baseitems_wooden_ammo_box</code></li>
+          <li>Meuble à CD → <code>FoXyRadio_CD_Rack_Wooden_Kit</code></li>
+        </ul>
+        <ul class="flow">
+          <li>Grande étagère → <code>rag_baseitems_woodenshelf_big_kit</code></li>
+          <li>Petite étagère (x2) → <code>rag_baseitems_woodenshelf_small_kit</code></li>
+          <li>Range-bûches → <code>rag_baseitems_firewood_holder_kit</code></li>
+          <li>Caisse militaire (bois) → <code>rag_baseitems_military_crate_wood</code></li>
+          <li>Réparer radiateur ← <code>Blowtorch</code> + <code>CarRadiator</code> → <code>CarRadiator</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Manches (bois) pour outils</h3>
+      <ul class="flow">
+        <li><span class="chip">📦 <code>WoodenPlank</code> + <code>HandSaw</code></span>
+            <span class="arrow">→</span> <span class="chip">🏁 Manche (pas peint)</span></li>
+        <li><span class="chip">📦 Manche (pas peint) + <code>BP_Spraycan_Black</code></span>
+            <span class="arrow">→</span> <span class="chip">🏁 <code>Heritier_Manche</code></span></li>
+      </ul>
+    </div>
+
+    <!-- ARMURIER -->
+    <h2 id="armurier" class="section"><span class="badge">3</span>🎯 Armurier</h2>
+    <div class="card">
+      <h3>Silencieux universels — Chaîne du tuyau</h3>
+      <ol class="flow">
+        <li><span class="chip">📦 <code>Pipe</code></span> <span class="chip">🧰 <b>Outil</b>: <code>mmg_raidsaw</code></span> <span class="arrow">→</span> <span class="chip">🏁 <code>Heritier_tuyau_couper1</code></span></li>
+        <li><span class="chip">📦 <code>Heritier_tuyau_couper1</code></span> <span class="chip">🧰 <b>Outil</b>: <code>WeaponCleaningKit</code></span> <span class="arrow">→</span> <span class="chip">🏁 <code>Heritier_tuyau_couper2</code></span></li>
+        <li><span class="chip">📦 <code>Heritier_tuyau_couper2</code></span> <span class="chip">📦 <code>SG_Powder</code></span> <span class="arrow">→</span> <span class="chip">🏁 <code>Heritier_tuyau_couper3</code></span></li>
+      </ol>
+      <ul class="flow">
+        <li>+ <code>Rag</code> → <code>TTC_Universal_Suppressor_TAVOR</code></li>
+        <li>+ <code>BP_Spraycan_White</code> → <code>…_Snow</code></li>
+        <li>+ <code>BP_Spraycan_Brown</code> → <code>…_CAMO</code></li>
+        <li>+ <code>BP_Spraycan_Green</code> → <code>…_Tan</code></li>
+        <li>+ <code>BP_Spraycan_Black</code> → <code>…_BLACK</code></li>
+      </ul>
+    </div>
+
+    <!-- SURVIVALISTE -->
+    <h2 id="survivaliste" class="section"><span class="badge">4</span>🏕️ Survivaliste</h2>
+    <div class="card">
+      <h3>Pièges & outils</h3>
+      <ul class="flow">
+        <li><code>FreezeBar_iron</code> + <code>QDLY_Hammer_02</code> → <code>BearTrap</code></li>
+        <li><code>FreezeBar_iron</code> + <code>QDLY_Hammer_02</code> → <code>FishNetTrap</code></li>
+        <li><code>FreezeBar_iron</code> + <code>QDLY_Hammer_02</code> → <code>Heritier_baton_de_fer</code></li>
+        <li><code>WoodenPlank</code> + <code>QDLY_Hammer_02</code> → <code>Heritier_Manche</code></li>
+        <li><code>Heritier_baton_de_fer</code> + <code>Heritier_Manche</code> → <code>Crossbow_Wood</code></li>
+        <li><code>Rope</code> + <code>LongWoodenStick</code> → <code>QDLY_Fishing_Rod_01</code></li>
+        <li><code>FreezeBar_iron</code> + <code>QDLY_Hammer_02</code> → <code>PortableGasStove</code></li>
+        <li><code>PurificationTablets</code> + <code>Land_TN_Well_Pump</code> → <code>PurificationTablets</code> (purifier eau)</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      Héritier · Guide conçu pour une lecture rapide en jeu (second écran) et prêt à imprimer.
+    </div>
+  </div>
+</body>
+</html>
